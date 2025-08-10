@@ -2,6 +2,10 @@
 
 A modern, full-stack gaming platform featuring beautiful glassmorphism design and game launch notifications.
 
+![GitHub](https://img.shields.io/badge/license-MIT-blue.svg)
+![Node.js](https://img.shields.io/badge/node.js-18%2B-green.svg)
+![React](https://img.shields.io/badge/react-18%2B-blue.svg)
+
 ## ✨ Features
 
 - **Modern React Frontend** with glassmorphism UI design
@@ -71,6 +75,22 @@ The application is configured for easy deployment to:
 - **Heroku/Render**: For full-stack hosting (client + server)
 - **VPS/Cloud**: For custom server deployment
 
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## 📄 License
 
-All rights reserved - Pandai Games © 2025
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔗 Links
+
+- **Documentation**: See individual markdown files in the repository
+- **Issues**: Report bugs and request features via GitHub Issues
+- **Discussions**: Join community discussions (if enabled)
+
+---
+
+**Pandai Games** © 2025 - Crafted with ❤️ for the gaming community
