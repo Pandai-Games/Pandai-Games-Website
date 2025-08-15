@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threads of Eenheid - A Turn-Based RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>⚔️ Threads of Eenheid ⚔️</h1>
+            <p>A Text-Based RPG Adventure</p>
+        </header>
+
+        <!-- Game Screen -->
+        <div id="game-screen">
+            <!-- Story/Intro Screen -->
+            <div id="intro-screen" class="screen active">
+                <div class="story-box">
+                    <h2>📜 The Dark Awakening</h2>
+                    <p>In the realm of Eenheid, darkness has begun to spread. Ancient evil stirs beneath the forgotten ruins of Shadowmere Keep. You are Kael, a young warrior chosen by fate to restore balance to the land.</p>
+                    <p>Armed with only a rusty sword and determination, you must venture forth to face the Shadow Lord and his minions.</p>
+                    <button onclick="startGame()" class="action-btn">🗡️ Begin Your Quest</button>
+                </div>
+            </div>
+
+            <!-- Main Game Screen -->
+            <div id="main-game" class="screen">
+                <!-- Player Stats -->
+                <div id="player-stats" class="stats-panel">
+                    <h3>🧙‍♂️ Kael the Brave</h3>
+                    <div class="stat">
+                        <span>Level: <span id="player-level">1</span></span>
+                        <span>XP: <span id="player-xp">0</span>/<span id="player-xp-needed">100</span></span>
+                    </div>
+                    <div class="stat">
+                        <span>❤️ HP: <span id="player-hp">50</span>/<span id="player-max-hp">50</span></span>
+                    </div>
+                    <div class="stat">
+                        <span>⚔️ Attack: <span id="player-attack">12</span></span>
+                        <span>🛡️ Defense: <span id="player-defense">5</span></span>
+                    </div>
+                    <div class="equipment">
+                        <p>🗡️ Weapon: <span id="player-weapon">Rusty Sword</span></p>
+                        <p>🛡️ Armor: <span id="player-armor">Cloth Shirt</span></p>
+                    </div>
+                </div>
+
+                <!-- Game Area -->
+                <div id="game-area">
+                    <div id="story-text" class="story-display">
+                        <p>You stand at the edge of the Whispering Woods. Dark shadows dance between the ancient trees...</p>
+                    </div>
+
+                    <!-- Battle Screen -->
+                    <div id="battle-screen" class="hidden">
+                        <div id="enemy-display">
+                            <h3 id="enemy-name">🐺 Shadow Wolf</h3>
+                            <p>❤️ HP: <span id="enemy-hp">30</span>/<span id="enemy-max-hp">30</span></p>
+                            <div class="enemy-ascii">
+                                <pre id="enemy-art">
+    🐺
+   /||\
+  / || \
+ /  ||  \
+    ||
+                                </pre>
+                            </div>
+                        </div>
+
+                        <div id="battle-actions">
+                            <button onclick="playerAttack()" class="battle-btn">⚔️ Attack</button>
+                            <button onclick="playerDefend()" class="battle-btn">🛡️ Defend</button>
+                            <button onclick="useItem()" class="battle-btn">🧪 Use Item</button>
+                        </div>
+
+                        <div id="battle-log"></div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div id="exploration-actions">
+                        <button onclick="exploreForward()" class="action-btn">🚶‍♂️ Continue Forward</button>
+                        <button onclick="searchArea()" class="action-btn">🔍 Search Area</button>
+                        <button onclick="rest()" class="action-btn">💤 Rest (Restore HP)</button>
+                        <button onclick="checkInventory()" class="action-btn">🎒 Inventory</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Screen -->
+            <div id="inventory-screen" class="screen">
+                <h2>🎒 Inventory</h2>
+                <div id="inventory-list">
+                    <div class="item">🧪 Health Potion x3</div>
+                </div>
+                <button onclick="closeInventory()" class="action-btn">← Back</button>
+            </div>
+
+            <!-- Victory Screen -->
+            <div id="victory-screen" class="screen">
+                <div class="story-box">
+                    <h2>🏆 Victory!</h2>
+                    <p>Congratulations, brave warrior! You have defeated the Shadow Lord and restored peace to Eenheid. The realm is safe once more, but your legend has only just begun...</p>
+                    <button onclick="restartGame()" class="action-btn">🔄 Play Again</button>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="game-over-screen" class="screen">
+                <div class="story-box">
+                    <h2>💀 Game Over</h2>
+                    <p>Your journey ends here, brave warrior. The darkness has claimed another soul, but hope is not lost. Rise again and face your destiny!</p>
+                    <button onclick="restartGame()" class="action-btn">🔄 Try Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Messages -->
+        <div id="message-log">
+            <div id="messages"></div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

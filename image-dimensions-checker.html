@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Dimensions Checker</title>
+</head>
+<body>
+    <h1>Image Dimensions</h1>
+    <img id="heroImage" src="https://www.pandaigames.com/web/image/1865-5a648ca5/ArkleitToE.png" alt="Hero Image" style="max-width: 100%; height: auto;">
+    <div id="dimensions">Loading...</div>
+
+    <script>
+        const img = document.getElementById('heroImage');
+        const dimensionsDiv = document.getElementById('dimensions');
+
+        img.onload = function() {
+            dimensionsDiv.innerHTML = `
+                <h2>Image Dimensions:</h2>
+                <p><strong>Natural Width:</strong> ${this.naturalWidth} pixels</p>
+                <p><strong>Natural Height:</strong> ${this.naturalHeight} pixels</p>
+                <p><strong>Displayed Width:</strong> ${this.width} pixels</p>
+                <p><strong>Displayed Height:</strong> ${this.height} pixels</p>
+                <p><strong>Aspect Ratio:</strong> ${(this.naturalWidth / this.naturalHeight).toFixed(2)}:1</p>
+            `;
+        };
+
+        img.onerror = function() {
+            dimensionsDiv.innerHTML = '<p style="color: red;">Error loading image</p>';
+        };
+    </script>
+</body>
+</html>

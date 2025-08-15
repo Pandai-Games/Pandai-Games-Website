@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import WebGameEmbed from './WebGameEmbed'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
@@ -15,9 +16,27 @@ function App() {
     }
   }, [activeSection])
 
+  // Navigation button style helper
+  const getNavButtonStyle = (section, isMobile = false) => ({
+    backgroundColor: activeSection === section ? '#7f1d1d' : '#dc2626',
+    color: 'white',
+    padding: isMobile ? '12px 24px' : '8px 16px',
+    border: activeSection === section ? '2px solid #fca5a5' : 'none',
+    borderRadius: '8px',
+    fontWeight: '500',
+    transition: 'all 0.3s',
+    fontSize: isMobile ? '1.5rem' : undefined,
+    boxShadow: activeSection === section ? `0 0 ${isMobile ? '15px' : '10px'} rgba(252, 165, 165, 0.5)` : 'none'
+  })
+
+  const handleNavHover = (e, section, isLeave = false) => {
+    e.target.style.backgroundColor = isLeave 
+      ? (activeSection === section ? '#7f1d1d' : '#dc2626')
+      : '#991b1b'
+  }
+
   const isValidEmail = (email) => {
-    return email && 
-           email.includes('@') && 
+    return email?.includes('@') && 
            email.includes('.') && 
            !email.startsWith('@') && 
            !email.endsWith('@') && 
@@ -64,9 +83,12 @@ function App() {
       case 'home':
         return (
           <>
-            {/* Hero Section */}
-            <section className="hero-bg h-screen flex items-center justify-center text-center text-white bg-center bg-no-repeat w-full" style={{backgroundSize: '100% auto'}}>
-              <div className="fade-in px-4">
+            {/* Background Layer - Fixed to viewport */}
+            <div className="hero-background-layer"></div>
+            
+            {/* Hero Section - Text Content Only */}
+            <section className="relative h-screen flex items-center justify-center text-center text-white z-20">
+              <div className="animate-fade-in px-4">
                 <h1 className="font-cinzel text-4xl sm:text-5xl md:text-7xl font-bold tracking-wider">Threads of Eenheid</h1>
                 <p className="text-lg sm:text-xl md:text-2xl mt-4 max-w-2xl mx-auto">An epic text-based RPG where your choices weave the fabric of destiny.</p>
                 <p className="mt-2 text-base sm:text-lg text-red-400">Let Your Quest Begin</p>
@@ -80,8 +102,8 @@ function App() {
             </section>
 
             {/* Welcome Section */}
-            <section className="py-20 animated-gradient">
-              <div className="container mx-auto px-6 text-center">
+            <section className="relative py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 z-10">
+              <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
                 <div className="max-w-3xl mx-auto">
                   <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-gray-900 mb-6">Powered by Imagination, Made for Everyone.</h2>
                   <div className="w-24 h-1 bg-red-500 mx-auto mb-8 rounded"></div>
@@ -106,16 +128,37 @@ function App() {
               <h1 className="font-cinzel text-4xl md:text-5xl font-bold text-center text-white mb-4">Our First Adventure</h1>
               <div className="w-24 h-1 bg-red-500 mx-auto mb-12 rounded"></div>
 
+              {/* Pre-Alpha Prototype Section */}
+              <div className="max-w-5xl mx-auto mb-16">
+                <div className="bg-brimstone-950 border border-red-900/30 rounded-lg p-6 mb-6">
+                  <div className="text-center mb-4">
+                    <h2 className="font-cinzel text-3xl font-bold text-white mb-2">Threads of Eenheid</h2>
+                    <span className="inline-block bg-red-700 text-white text-sm font-semibold px-3 py-1 rounded-full mb-2">Pre-Alpha Prototype</span>
+                    <p className="text-red-400 font-semibold mb-2">Playable Demo - Turn-Based RPG</p>
+                    <p className="text-gray-300 text-sm mb-4">
+                      Experience an early taste of our vision! This prototype showcases the core turn-based combat mechanics we're developing for the full game.
+                    </p>
+                  </div>
+                  <WebGameEmbed />
+                  <div className="text-center mt-4">
+                    <p className="text-gray-400 text-xs">
+                      This is a simplified prototype. The full game will feature rich narratives, complex choices, and expanded gameplay systems.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Game Card */}
               <div className="max-w-5xl mx-auto h-[600px] flip-card">
-                <div className="flip-card-inner shadow-2xl">
+                <div className="flip-card-inner shadow-2xl relative w-full h-full transition-transform duration-700">
                   {/* Front of Card */}
-                  <div className="flip-card-front bg-brimstone-950 flex flex-col items-center justify-center p-8 text-center border border-red-900/30">
+                  <div className="flip-card-front bg-brimstone-950 flex flex-col items-center justify-center p-8 text-center border border-red-900/30 absolute inset-0 w-full h-full rounded-lg overflow-hidden">
                     <i data-lucide="shield-question" className="w-24 h-24 text-red-400 mb-6"></i>
                     <h2 className="font-cinzel text-4xl font-bold text-white mb-2">Threads of Eenheid</h2>
                     <p className="text-gray-400 text-lg">Hover to reveal your quest</p>
                   </div>
                   {/* Back of Card */}
-                  <div className="flip-card-back flex flex-col bg-brimstone-950 border border-red-900/30">
+                  <div className="flip-card-back flex flex-col bg-brimstone-950 border border-red-900/30 absolute inset-0 w-full h-full rounded-lg overflow-hidden">
                     <div className="w-full h-1/2">
                       <img src="https://www.pandaigames.com/web/image/1865-5a648ca5/ArkleitToE.png" alt="Concept art" className="object-cover w-full h-full" />
                     </div>
@@ -126,7 +169,7 @@ function App() {
                         Dive into a realm of magic, conflict, and ancient secrets. This text-based journey puts narrative first, where every decision matters.
                       </p>
                       <div className="mt-4">
-                        <span className="inline-block bg-gray-700 text-red-300 text-sm font-semibold mr-2 mb-2 px-3 py-1 rounded-full">Coming Soon</span>
+                        <span className="inline-block bg-gray-700 text-red-300 text-sm font-semibold mr-2 mb-2 px-3 py-1 rounded-full">Full Release Coming Soon</span>
                       </div>
                     </div>
                   </div>
@@ -168,21 +211,21 @@ function App() {
             <div className="container mx-auto px-6">
               <div className="max-w-4xl mx-auto text-center">
                 <h1 className="font-cinzel text-4xl md:text-5xl font-bold text-gray-900 mb-6">Where Imagination Meets Innovation</h1>
-                <div className="w-24 h-1 bg-red-500 mx-auto mb-8 rounded"></div>
+                <div className="w-94 h-1 bg-red-500 mx-auto mb-8 rounded"></div>
                 <p className="text-lg text-gray-600 leading-relaxed mb-12">
                   Welcome to Pandai Games, where we're not just a gaming platform—we're a community dedicated to bringing exceptional interactive experiences to players around the world.
                 </p>
 
                 <div className="text-left mt-16">
-                  <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-gray-800 mb-4">Mission Statement</h2>
-                  <div className="bg-gray-50 p-8 rounded-lg mb-8">
-                    <p className="text-gray-600 leading-relaxed mb-4">
+                  <h2 className="font-cinzel text-center text-3xl md:text-4xl font-bold text-gray-800 mb-4">Mission Statement</h2>
+                  <div className="bg-brimstone-950 p-8 rounded-lg mb-8">
+                    <p className="text-red-600 leading-relaxed mb-4">
                       At Pandai Games, we create focused, memorable games where compelling stories and satisfying gameplay shine. Our approach is intentional—every moment is crafted to engage, every interaction designed to feel worthwhile.
                     </p>
-                    <p className="text-gray-600 leading-relaxed mb-4">
+                    <p className="text-red-600 leading-relaxed mb-4">
                       We believe great experiences don't need to overstay their welcome. By concentrating on rich storytelling and polished mechanics, we deliver adventures that resonate long after you've finished playing—games that fit into your life, not demand from it.
                     </p>
-                    <p className="text-gray-600 leading-relaxed mb-4">
+                    <p className="text-red-600 leading-relaxed mb-4">
                       But we're more than what we make—we're who we make it for. This studio was built on imagination and opportunity: a place where undiscovered talent can flourish, where creativity outweighs credentials, and where the overlooked get seen. In an industry obsessed with prestige, we bet on potential.
                     </p>
                     <div className="text-center mt-6 p-4 bg-red-50 rounded-lg">
@@ -285,7 +328,7 @@ function App() {
   return (
     <div className="app bg-brimstone-900 text-white min-h-screen font-inter">
       {/* Header */}
-      <header className="bg-brimstone-950/95 backdrop-blur-sm sticky top-0 z-50 border-b border-red-900/30">
+      <header className="bg-brimstone-950 backdrop-blur-sm sticky top-0 z-50 border-b border-red-900/30">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="font-cinzel text-2xl font-bold text-white z-50">
             Pandai <span className="text-red-400">Games</span>
@@ -293,38 +336,17 @@ function App() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => setActiveSection('home')}
-              style={{ backgroundColor: activeSection === 'home' ? '#b91c1c' : '#dc2626', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s' }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'home' ? '#b91c1c' : '#dc2626'}
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => setActiveSection('about')}
-              style={{ backgroundColor: activeSection === 'about' ? '#b91c1c' : '#dc2626', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s' }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'about' ? '#b91c1c' : '#dc2626'}
-            >
-              About
-            </button>
-            <button 
-              onClick={() => setActiveSection('games')}
-              style={{ backgroundColor: activeSection === 'games' ? '#b91c1c' : '#dc2626', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s' }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'games' ? '#b91c1c' : '#dc2626'}
-            >
-              Games
-            </button>
-            <button 
-              onClick={() => setActiveSection('contact')}
-              style={{ backgroundColor: activeSection === 'contact' ? '#b91c1c' : '#dc2626', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s' }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'contact' ? '#b91c1c' : '#dc2626'}
-            >
-              Contact
-            </button>
+            {['home', 'about', 'games', 'contact'].map(section => (
+              <button 
+                key={section}
+                onClick={() => setActiveSection(section)}
+                style={getNavButtonStyle(section)}
+                onMouseEnter={(e) => handleNavHover(e, section)}
+                onMouseLeave={(e) => handleNavHover(e, section, true)}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </button>
+            ))}
           </div>
           
           {/* Mobile Menu Button */}
@@ -342,38 +364,17 @@ function App() {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-brimstone-950/98 backdrop-blur-sm">
             <div className="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-              <button 
-                onClick={() => { setActiveSection('home'); setMobileMenuOpen(false); }}
-                style={{ backgroundColor: activeSection === 'home' ? '#b91c1c' : '#dc2626', color: 'white', padding: '12px 24px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s', fontSize: '1.5rem' }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'home' ? '#b91c1c' : '#dc2626'}
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => { setActiveSection('about'); setMobileMenuOpen(false); }}
-                style={{ backgroundColor: activeSection === 'about' ? '#b91c1c' : '#dc2626', color: 'white', padding: '12px 24px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s', fontSize: '1.5rem' }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'about' ? '#b91c1c' : '#dc2626'}
-              >
-                About
-              </button>
-              <button 
-                onClick={() => { setActiveSection('games'); setMobileMenuOpen(false); }}
-                style={{ backgroundColor: activeSection === 'games' ? '#b91c1c' : '#dc2626', color: 'white', padding: '12px 24px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s', fontSize: '1.5rem' }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'games' ? '#b91c1c' : '#dc2626'}
-              >
-                Games
-              </button>
-              <button 
-                onClick={() => { setActiveSection('contact'); setMobileMenuOpen(false); }}
-                style={{ backgroundColor: activeSection === 'contact' ? '#b91c1c' : '#dc2626', color: 'white', padding: '12px 24px', border: 'none', borderRadius: '8px', fontWeight: '500', transition: 'all 0.3s', fontSize: '1.5rem' }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#991b1b'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = activeSection === 'contact' ? '#b91c1c' : '#dc2626'}
-              >
-                Contact
-              </button>
+              {['home', 'about', 'games', 'contact'].map(section => (
+                <button 
+                  key={section}
+                  onClick={() => { setActiveSection(section); setMobileMenuOpen(false); }}
+                  style={getNavButtonStyle(section, true)}
+                  onMouseEnter={(e) => handleNavHover(e, section)}
+                  onMouseLeave={(e) => handleNavHover(e, section, true)}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
         )}

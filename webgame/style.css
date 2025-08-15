@@ -1,0 +1,319 @@
+/* Game Styling - Minimal but Clean */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #1a0505, #2d0a0a);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#game-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.3);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #8B4513;
+    padding-bottom: 15px;
+}
+
+header h1 {
+    color: #FFD700;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #CD853F;
+    font-style: italic;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Story and UI Boxes */
+.story-box {
+    background: rgba(139, 69, 19, 0.2);
+    border: 1px solid #8B4513;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.story-box h2 {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.story-box p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+/* Player Stats Panel */
+#player-stats {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #4A4A4A;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#player-stats h3 {
+    color: #87CEEB;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    font-size: 1.1em;
+}
+
+.equipment {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #4A4A4A;
+}
+
+.equipment p {
+    margin: 5px 0;
+    color: #DDA0DD;
+}
+
+/* Game Area */
+#game-area {
+    background: rgba(25, 25, 112, 0.1);
+    border: 1px solid #4169E1;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.story-display {
+    background: rgba(0, 0, 0, 0.5);
+    border-left: 4px solid #FFD700;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/* Battle Screen */
+#battle-screen {
+    text-align: center;
+}
+
+#enemy-display {
+    background: rgba(139, 0, 0, 0.2);
+    border: 2px solid #8B0000;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#enemy-display h3 {
+    color: #FF6347;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.enemy-ascii {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8em;
+    color: #FF4500;
+    margin: 15px 0;
+}
+
+#battle-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+#battle-log {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #696969;
+    border-radius: 5px;
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+/* Action Buttons */
+#exploration-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.action-btn, .battle-btn {
+    background: linear-gradient(145deg, #8B4513, #A0522D);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.action-btn:hover, .battle-btn:hover {
+    background: linear-gradient(145deg, #A0522D, #CD853F);
+    border-color: #FFD700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.battle-btn {
+    background: linear-gradient(145deg, #4682B4, #5F9EA0);
+    min-width: 120px;
+}
+
+.battle-btn:hover {
+    background: linear-gradient(145deg, #5F9EA0, #87CEEB);
+}
+
+/* Inventory */
+#inventory-screen {
+    padding: 20px;
+}
+
+#inventory-screen h2 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#inventory-list {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #4A4A4A;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 200px;
+}
+
+.item {
+    background: rgba(139, 69, 19, 0.3);
+    border: 1px solid #8B4513;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.item:hover {
+    background: rgba(139, 69, 19, 0.5);
+}
+
+/* Message Log */
+#message-log {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #4A4A4A;
+    border-radius: 8px;
+    padding: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#messages {
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.message {
+    margin: 3px 0;
+    padding: 2px 0;
+}
+
+.message.damage {
+    color: #FF6B6B;
+}
+
+.message.heal {
+    color: #4ECDC4;
+}
+
+.message.level-up {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.message.story {
+    color: #87CEEB;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    #game-container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .action-btn, .battle-btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    #exploration-actions, #battle-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .stat {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
