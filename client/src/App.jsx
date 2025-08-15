@@ -62,43 +62,7 @@ function App() {
   const renderContent = () => {
     switch(activeSection) {
       case 'home':
-        return (
-          <>
-            {/* Hero Section - Full width */}
-            <section className="hero-bg h-screen flex items-center justify-center text-center text-white relative">
-              <div className="fade-in px-4 z-10 relative">
-                <h1 className="font-cinzel text-4xl sm:text-5xl md:text-7xl font-bold tracking-wider">Threads of Eenheid</h1>
-                <p className="text-lg sm:text-xl md:text-2xl mt-4 max-w-2xl mx-auto">An epic text-based RPG where your choices weave the fabric of destiny.</p>
-                <p className="mt-2 text-base sm:text-lg text-red-400">Let Your Quest Begin</p>
-                <button 
-                  onClick={() => setActiveSection('games')}
-                  className="mt-8 inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105"
-                >
-                  Discover the Game
-                </button>
-              </div>
-            </section>
-
-            {/* Welcome Section */}
-            <section className="py-20 animated-gradient">
-              <div className="container mx-auto px-6 text-center">
-                <div className="max-w-3xl mx-auto">
-                  <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-gray-900 mb-6">Powered by Imagination, Made for Everyone.</h2>
-                  <div className="w-24 h-1 bg-red-500 mx-auto mb-8 rounded"></div>
-                  <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                    Welcome to Pandai Games, an indie studio with a passion for crafting unique and engaging worlds. We believe that great games come from the heart, focusing on small-scale, accessible experiences that deliver rich narratives and compelling gameplay.
-                  </p>
-                  <button 
-                    onClick={() => setActiveSection('about')}
-                    className="mt-4 inline-block bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300"
-                  >
-                    Learn More About Us
-                  </button>
-                </div>
-              </div>
-            </section>
-          </>
-        )
+        return null; // Home content is now handled in the main structure
       case 'games':
         return (
           <main className="py-20">
@@ -381,7 +345,45 @@ function App() {
 
       {/* Main Content */}
       <div className={activeSection === 'about' ? 'bg-white' : activeSection === 'contact' ? 'bg-brimstone-900' : 'bg-brimstone-900'}>
-        {renderContent()}
+        {activeSection === 'home' ? (
+          <>
+            {/* Hero Section - Full width outside container */}
+            <section className="hero-bg h-screen flex items-center justify-center text-center text-white relative -mt-20 pt-20">
+              <div className="fade-in px-4 z-10 relative">
+                <h1 className="font-cinzel text-4xl sm:text-5xl md:text-7xl font-bold tracking-wider">Threads of Eenheid</h1>
+                <p className="text-lg sm:text-xl md:text-2xl mt-4 max-w-2xl mx-auto">An epic text-based RPG where your choices weave the fabric of destiny.</p>
+                <p className="mt-2 text-base sm:text-lg text-red-400">Let Your Quest Begin</p>
+                <button 
+                  onClick={() => setActiveSection('games')}
+                  className="mt-8 inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105"
+                >
+                  Discover the Game
+                </button>
+              </div>
+            </section>
+            
+            {/* Welcome Section */}
+            <section className="py-20 animated-gradient">
+              <div className="container mx-auto px-6 text-center">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-gray-900 mb-6">Powered by Imagination, Made for Everyone.</h2>
+                  <div className="w-24 h-1 bg-red-500 mx-auto mb-8 rounded"></div>
+                  <p className="text-lg text-gray-600 leading-relaxed mb-4">
+                    Welcome to Pandai Games, an indie studio with a passion for crafting unique and engaging worlds. We believe that great games come from the heart, focusing on small-scale, accessible experiences that deliver rich narratives and compelling gameplay.
+                  </p>
+                  <button 
+                    onClick={() => setActiveSection('about')}
+                    className="mt-4 inline-block bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300"
+                  >
+                    Learn More About Us
+                  </button>
+                </div>
+              </div>
+            </section>
+          </>
+        ) : (
+          renderContent()
+        )}
       </div>
 
       {/* Footer */}
