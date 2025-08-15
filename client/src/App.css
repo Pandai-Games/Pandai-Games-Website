@@ -1,23 +1,6 @@
 /* Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;700&display=swap');
 
-/* Reset and ensure full width */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-}
-
 /* Font families */
 .font-cinzel { font-family: 'Cinzel', serif; }
 .font-inter { font-family: 'Inter', sans-serif; }
@@ -26,7 +9,6 @@ html, body {
 body {
   background: linear-gradient(135deg, #1a0a0a 0%, #0f0505 100%);
   background-attachment: fixed;
-  width: 100%;
 }
 
 /* Animations */
@@ -51,22 +33,15 @@ body {
   animation: gradient-animation 15s ease infinite;
 }
 
-/* Hero background with brimstone overlay - full width breakout */
+/* Hero background with brimstone overlay */
 .hero-bg {
-  background: #1a0a0a; /* Fallback color */
   background-image: 
     linear-gradient(rgba(26, 10, 10, 0.8), rgba(15, 5, 5, 0.8)), 
     url('https://www.pandaigames.com/web/image/1865-5a648ca5/ArkleitToE.png');
-  background-position: center center;
+  background-attachment: fixed;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  min-height: 100vh;
 }
 
 /* Card flip animations */
