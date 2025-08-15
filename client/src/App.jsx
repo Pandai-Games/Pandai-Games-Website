@@ -64,9 +64,9 @@ function App() {
       case 'home':
         return (
           <>
-            {/* Hero Section */}
-            <section className="hero-bg h-screen flex items-center justify-center text-center text-white">
-              <div className="fade-in px-4">
+            {/* Hero Section - Full width */}
+            <section className="hero-bg h-screen flex items-center justify-center text-center text-white relative">
+              <div className="fade-in px-4 z-10 relative">
                 <h1 className="font-cinzel text-4xl sm:text-5xl md:text-7xl font-bold tracking-wider">Threads of Eenheid</h1>
                 <p className="text-lg sm:text-xl md:text-2xl mt-4 max-w-2xl mx-auto">An epic text-based RPG where your choices weave the fabric of destiny.</p>
                 <p className="mt-2 text-base sm:text-lg text-red-400">Let Your Quest Begin</p>
